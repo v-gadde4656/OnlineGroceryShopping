@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "Order";
+}
+
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+
+<div class="row Order">
+    <div class="col-md-4" style="text-align:center">
+        <h2><label id="lblProduct">@TempData["Product"]</label></h2>
+        <p>
+            <img src="@TempData["img"].ToString().Substring(1,TempData["img"].ToString().Length-1)" />
+        </p>
+        <p>MRP : Rs @TempData["Amt"] / @TempData["Status"] </p>
+    </div>
+    <div class="col-md-4" style="text-align:center">
+        <br /><br /><br /><br /><p>Quantity : <input type="number" id="txtQuantity" />@*onpaste="return false;"*@  </p>
+    </div>
+    <div class="col-md-4" style="text-align:center">
+        <br /><br /><br /><br /><p><input class="btn btn-light" type="button" value="Proceed" id="btnProceed" width="70" style="background-color:blue" /> </p>
+    </div>
+</div>
+
+<div class="row Payment" style="display:none">
+    <div class="col-md-12" style="text-align:center">
+        <br />
+        <h2>Order Id :  <label id="lblOrdId" /></h2>
+        <br />
+    </div>
+    <div class="col-md-12" style="text-align:center">
+        <br />
+        <h2>Total Amount :  <label id="lblTotAmt" /></h2>
+        <br />
+    </div>
+    <div class="col-md-12" style="text-align:center">
+        <br />
+        <h2>
+            Pament Mode :
+            <select name="txtPayMode" id="txtPayMode">
+                <option value="UPI">UPI</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Debit Card">Debit Card</option>
+                <option value="Internet Banking">Internet Banking</option>
+            </select>
+        </h2>
+    </div>
+    <div class="col-md-12" style="text-align:center">
+        <br />
+        <input class="btn btn-light" type="button" value="PROCEED PAYMENT" id="btnProceedPay" width="70" style="background-color:blue" />
+    </div>
+</div>
+<div class="row ProceedPay" style="display:none">
+    <div class="col-md-12" style="text-align:center">
+        <br />
+        <br />
+        <br />
+        <h2><label id="lblProceedPay" /></h2>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.13.2.min.js"></script>
+    <script type="text/javascript">
+        $("#btnProceed").click(function () {
+            var obj = {};
+            obj.Product = $('#lblProduct').text();
+            obj.Amount = @TempData["Amt"];
+            obj.Quantity = $('#txtQuantity').val();
+            if (obj.Quantity <= 0) {
+                alert("Quantity Should be greater then 0.");
+                return;
+            }
+            //alert(obj.Amount + "," + obj.Quantity);
+            $.ajax({
+                url: "/Home/Proceed",
+                method: "post",
+                data: '{obj: ' + JSON.stringify(obj) + '}',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    $('.Order').hide();
+                    $('.Payment').show();
+                    $('.ProceedPay').hide();
+                    $("#lblOrdId").text(response.OrdId);
+                    $("#lblTotAmt").text(response.Amount);
+                },
+                error: function (response) {
+                    alert("Error while Log in the Application");
+                }
+            });
+        });
+
+        $("#btnProceedPay").click(function () {
+            var obj = {};
+            obj.OrdId = $('#lblOrdId').text();
+            obj.Amount = $('#lblTotAmt').text();
+            obj.PayMode = $('#txtPayMode').val();
+            $.ajax({
+                url: "/Home/ProceedPay",
+                method: "post",
+                data: '{obj: ' + JSON.stringify(obj) + '}',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    $('.Order').hide();
+                    $('.Payment').hide();
+                    $('.ProceedPay').show();
+                    $("#lblProceedPay").text(response);
+                },
+                error: function (response) {
+                    alert("Error while Log in the Application");
+                }
+            });
+        });
+    </script>
+}
