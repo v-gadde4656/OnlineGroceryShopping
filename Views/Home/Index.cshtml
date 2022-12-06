@@ -1,0 +1,145 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron" style="text-align:center">
+    @*<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>*@
+    <p>Our Recommendations For You <br/>
+    Based on what customers like you have bought</p>
+    @*<p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+</div>
+
+<div class="row">
+    <div class="col-md-4" style="text-align:center">
+        <h2>Onion</h2>
+        <p>
+            @*{ Session["img"] = "~/Image/10000148_30-fresho-onion.jpg";}*@
+            <a href="@Url.Action("Order","Home",new {img = "~/Image/10000148_30-fresho-onion.jpg", Product = "Onion" , ProductId = "1" ,Amt = "1" ,Status = "Kg" })"><img src="~/Image/10000148_30-fresho-onion.jpg" /></a>
+        </p>
+        <p>MRP : 1 $</p>
+    </div>
+    <div class="col-md-4" style="text-align:center">
+        <h2>Potato</h2>
+        <p>
+            @*{ Session["img"] = "~/Image/10000159_26-fresho-potato.jpg";}*@
+            <a href="@Url.Action("Order","Home",new {img = "~/Image/10000159_26-fresho-potato.jpg", Product = "Potato" , ProductId = "2" ,Amt = "1.15" ,Status = "Kg" })"><img src="~/Image/10000159_26-fresho-potato.jpg" /></a>
+        </p>
+        <p>MRP : 1.15 $</p>
+    </div>
+    <div class="col-md-4" style="text-align:center">
+        <h2>Beans - Haricot</h2>
+        <p>
+            @*{ Session["img"] = "~/Image/10000276_12-fresho-beans-cowpea.jpg";}*@
+            <a href="@Url.Action("Order","Home",new {img = "~/Image/10000276_12-fresho-beans-cowpea.jpg", Product = "Beans - Haricot" , ProductId = "3" ,Amt = "1.20" ,Status = "Kg" })"><img src="~/Image/10000276_12-fresho-beans-cowpea.jpg" /></a>
+        </p>
+        <p>MRP : 1.20 $</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4" style="text-align:center">
+        <h2>Banana</h2>
+        <p>
+            @*{ Session["img"] = "~/Image/10000346_18-fresho-banana-nendran.jpg";}*@
+            <a href="@Url.Action("Order","Home",new {img = "~/Image/10000346_18-fresho-banana-nendran.jpg", Product = "Banana" , ProductId = "4" ,Amt = "1.15" ,Status = "Kg" })"><img src="~/Image/10000346_18-fresho-banana-nendran.jpg" /></a>
+        </p>
+        <p>MRP : 1.15 $</p>
+    </div>
+    <div class="col-md-4" style="text-align:center">
+        <h2>Orange</h2>
+        <p>
+            @*{ Session["img"] = "~/Image/20000910_12-fresho-orange-imported.jpg";}*@
+            <a href="@Url.Action("Order","Home",new {img = "~/Image/20000910_12-fresho-orange-imported.jpg", Product = "Orange" , ProductId = "5" ,Amt = "2" ,Status = "Kg" })"><img src="~/Image/20000910_12-fresho-orange-imported.jpg" /></a>
+        </p>
+        <p>MRP : 2 $</p>
+    </div>
+    <div class="col-md-4" style="text-align:center">
+        <h2>Sweet Corn</h2>
+        <p>
+            @*{ Session["img"] = "~/Image/40004992_14-fresho-sweet-corn.jpg";}*@
+            <a href="@Url.Action("Order","Home",new {img = "~/Image/40004992_14-fresho-sweet-corn.jpg", Product = "Sweet Corn" , ProductId = "6" ,Amt = "2" ,Status = "Kg" })"><img src="~/Image/40004992_14-fresho-sweet-corn.jpg" /></a>
+        </p>
+        <p>MRP : 2 $</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4" style="text-align:center">
+        <h2>Mosambi</h2>
+        <p>
+            @*{ Session["img"] = "~/Image/40105338_2-fresho-mosambi-economy.jpg";}*@
+            <a href="@Url.Action("Order","Home",new {img = "~/Image/40105338_2-fresho-mosambi-economy.jpg", Product = "Mosambi" , ProductId = "7" ,Amt = "1" ,Status = "Kg" })"><img src="~/Image/40105338_2-fresho-mosambi-economy.jpg" /></a>
+        </p>
+        <p>MRP : 1 $</p>
+    </div>
+    <div class="col-md-4" style="text-align:center">
+        <h2>Apple</h2>
+        <p>
+            @*{ Session["img"] = "~/Image/40128384_1-fresho-apple-pink-lady.jpg";}*@
+            <a href="@Url.Action("Order","Home",new {img = "~/Image/40128384_1-fresho-apple-pink-lady.jpg", Product = "Apple" , ProductId = "8" ,Amt = "3" ,Status = "Kg" })"><img src="~/Image/40128384_1-fresho-apple-pink-lady.jpg" /></a>
+        </p>
+        <p>MRP : 3 $</p>
+    </div>
+    <div class="col-md-4" style="text-align:center">
+        <h2>Capsicum - Red</h2>
+        <p>
+            @*{ Session["img"] = "~/Image/40149660_1-fresho-capsicum-red.jpg";}*@
+            <a href="@Url.Action("Order","Home",new {img = "~/Image/40149660_1-fresho-capsicum-red.jpg", Product = "Capsicum - Red" , ProductId = "9" ,Amt = "1.30" ,Status = "Kg" })"><img src="~/Image/40149660_1-fresho-capsicum-red.jpg" /></a>
+        </p>
+        <p>MRP : 1.30 $</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4" style="text-align:center">
+        <h2>Cothas coffee</h2>
+        <p>
+            @*{ Session["img"] = "~/Image/186070_8-cothas-coffee-.jpg";}*@
+            <a href="@Url.Action("Order","Home",new {img = "~/Image/186070_8-cothas-coffee-.jpg", Product = "Cothas coffee" , ProductId = "10" ,Amt = "2" ,Status = "Qty" })"><img src="~/Image/186070_8-cothas-coffee-.jpg" /></a>
+        </p>
+        <p>MRP : 2 $</p>
+    </div>
+    <div class="col-md-4" style="text-align:center">
+        <h2>Colgate</h2>
+        <p>
+            @*{ Session["img"] = "~/Image/263921_17-colgate-strong-teeth-anticavity-toothpaste-with-amino-shakti-formula-provides-fresher-breath.jpg";}*@
+            <a href="@Url.Action("Order","Home",new {img = "~/Image/263921_17-colgate-strong-teeth-anticavity-toothpaste-with-amino-shakti-formula-provides-fresher-breath.jpg", Product = "Colgate" , ProductId = "11" ,Amt = "2.50" ,Status = "Qty" })"><img src="~/Image/263921_17-colgate-strong-teeth-anticavity-toothpaste-with-amino-shakti-formula-provides-fresher-breath.jpg" /></a>
+        </p>
+        <p>MRP : 2.50 $</p>
+    </div>
+    <div class="col-md-4" style="text-align:center">
+        <h2>Pure Ghee Tuppa</h2>
+        <p>
+            @*{ Session["img"] = "~/Image/213273_7-nandini-pure-ghee.jpg";}*@
+            <a href="@Url.Action("Order","Home",new {img = "~/Image/213273_7-nandini-pure-ghee.jpg", Product = "Pure Ghee Tuppa" , ProductId = "12" ,Amt = "5" ,Status = "Qty" })"><img src="~/Image/213273_7-nandini-pure-ghee.jpg" /></a>
+        </p>
+        <p>MRP : 5 $</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4" style="text-align:center">
+        <h2>Surf Excel</h2>
+        <p>
+            @*{ Session["img"] = "~/Image/215595_23-surf-excel-easy-wash-detergent-powder.jpg";}*@
+            <a href="@Url.Action("Order","Home",new {img = "~/Image/215595_23-surf-excel-easy-wash-detergent-powder.jpg", Product = "Surf Excel" , ProductId = "13" ,Amt = "2" ,Status = "Qty" })"><img src="~/Image/215595_23-surf-excel-easy-wash-detergent-powder.jpg" /></a>
+        </p>
+        <p>MRP : 2 $</p>
+    </div>
+    <div class="col-md-4" style="text-align:center">
+        <h2>Tata Tea Gold</h2>
+        <p>
+            @*{ Session["img"] = "~/Image/240067_19-tata-tea-gold-tea.jpg";}*@
+            <a href="@Url.Action("Order","Home",new {img = "~/Image/240067_19-tata-tea-gold-tea.jpg", Product = "Tata Tea Gold" , ProductId = "14" ,Amt = "1.10" ,Status = "Qty" })"><img src="~/Image/240067_19-tata-tea-gold-tea.jpg" /></a>
+        </p>
+        <p>MRP : 1.10 $</p>
+    </div>
+    <div class="col-md-4" style="text-align:center">
+        <h2>Tata Salt</h2>
+        <p>
+            @*{ Session["img"] = "~/Image/241600_5-tata-salt-iodized.jpg";}*@
+            <a href="@Url.Action("Order","Home",new {img = "~/Image/241600_5-tata-salt-iodized.jpg", Product = "Tata Salt" , ProductId = "15" ,Amt = "0.50" ,Status = "Qty" })"><img src="~/Image/241600_5-tata-salt-iodized.jpg" /></a>
+        </p>
+        <p>MRP : 0.50 $</p>
+    </div>
+</div>

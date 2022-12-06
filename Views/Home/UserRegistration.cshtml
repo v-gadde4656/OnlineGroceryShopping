@@ -1,0 +1,86 @@
+﻿@model OnlineGrocerySopping.Models.RegistrationDetails
+@{
+    Layout = null;
+    ViewBag.Title = "UserRegistration";
+    if (ViewBag.Message != null)
+    {
+        <span style="text-align:center; font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@ViewBag.Message</span>
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Consumer Signup</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <style type="text/css">
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4 form">
+                @using (Html.BeginForm("UserRegistration", "Home", FormMethod.Post))
+                {
+                    <form action="signup-consumer.php" method="POST" autocomplete="">
+                        <h2 class="text-center">Consumer Signup</h2>
+                        <p class="text-center">Please Provide Correct Details.</p>
+                        <div class="form-group">
+                            @*<input class="form-control" type="text" name="name" placeholder="Full Name" required value="<?php echo $name ?>">*@
+                            @Html.TextBoxFor(a => a.name, new { @placeholder = "Full Name", @class = "form-control" })
+                            @Html.ValidationMessageFor(a => a.name, "", new { @class = "error" })
+                        </div>
+                        <div class="form-group">
+                            @*<input class="form-control" type="email" name="email" placeholder="Email Address" required value="<?php echo $email ?>">*@
+                            @Html.TextBoxFor(a => a.email, new { @placeholder = "Email Address", @class = "form-control" })
+                            @Html.ValidationMessageFor(a => a.email, "", new { @class = "error" })
+                        </div>
+
+                        <div class="form-group">
+                            @*<input class="form-control" type="text" name="gender" placeholder="Gender" required">*@
+                            @Html.TextBoxFor(a => a.gender, new { @placeholder = "Gender", @class = "form-control" })
+                            @Html.ValidationMessageFor(a => a.gender, "", new { @class = "error" })
+                        </div>
+
+                        <div class="form-group">
+                            @*<input class="form-control" type="text" name="mobile" placeholder="Mobile" required">*@
+                            @Html.TextBoxFor(a => a.mobile, new { @placeholder = "Mobile", @class = "form-control" })
+                            @Html.ValidationMessageFor(a => a.mobile, "", new { @class = "error" })
+                        </div>
+
+                        <div class="form-group">
+                            @*<input class="form-control" type="password" name="password" placeholder="Password" required>*@
+                            @Html.TextBoxFor(a => a.password, new { @placeholder = "Password", @class = "form-control" })
+                            @Html.ValidationMessageFor(a => a.password, "", new { @class = "error" })
+                        </div>
+                        <div class="form-group">
+                            @*<input class="form-control" type="password" name="cpassword" placeholder="Confirm password" required>*@
+                            @Html.TextBoxFor(a => a.cpassword, new { @placeholder = "Confirm password", @class = "form-control" })
+                            @Html.ValidationMessageFor(a => a.cpassword, "", new { @class = "error" })
+                        </div>
+                        <div class="form-group">
+                            <select name="Role" id="Role" class="form-control">
+                                <option value="User">User</option>
+                                <option value="Owner">Owner</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control button" type="submit" name="signup" value="Signup">
+                        </div>
+                        <div class="link login-link text-center">
+                            Already a Consumer? @*<a href="login-consumer.php">Login Here</a>*@
+                            @Html.ActionLink("Login Here", "Login", "Home")
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

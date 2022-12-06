@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewBag.Title = "Order";
+}
+
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<div class="Order">
+    <br />
+    <div class="row" style="border:dotted">
+        <div class="col-md-4" style="text-align:center">
+            <h2><label id="lblProduct">@TempData["Product"]</label></h2>
+            <p>
+                <img src="@TempData["img"].ToString().Substring(1,TempData["img"].ToString().Length-1)" />
+            </p>
+            <p>MRP : $ @TempData["Amt"] / @TempData["Status"] </p>
+        </div>
+        <div class="col-md-4" style="text-align:center">
+            <br /><br /><br /><br /><p>Quantity : <input type="number" id="txtQuantity" />@*onpaste="return false;"*@  </p>
+        </div>
+        <div class="col-md-4" style="text-align:center">
+            <br /><br /><br /><br /><p><button type="button" style="background-color: blue; width: 200px;" id="btnProceed"><span>Proceed</span></button></p>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12" style="text-align:center">
+            <button type="button" style="background-color: blue; width: 200px;" onclick="location.href='@Url.Action("Index","Home")'"><span>Back</span></button>
+        </div>
+    </div>
+</div>
+
+<div class="Payment" style="display: none;">
+    <br />
+    <div class="row" style="border: dotted">
+        <div class="col-md-12" style="text-align:center">
+            <br />
+            <h4>ORDER ID :  <label id="lblOrdId" /></h4>
+        </div>
+        <div class="col-md-12" style="text-align:center">
+            <br />
+            <h4>TOTAL AMOUNT :  <label id="lblTotAmt" /></h4>
+        </div>
+        <div class="col-md-12" style="text-align:center">
+            <br />
+            <h4>
+                PAMENT MODE :
+                <br /><br />
+                @*<select name="txtPayMode" id="txtPayMode">
+                    <option value="UPI">UPI</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="Debit Card">Debit Card</option>
+                    <option value="Internet Banking">Internet Banking</option>
+                    </select>*@
+                <table style="width: 70%; text-align: center;">
+                    <tr>
+                        <td style="text-align:right">Cash :</td>
+                        <td style="text-align: left; Width: 50px;"><input type="number" name="Cash" id="Cash" Width="50" placeholder="0" /></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">UPI :</td>
+                        <td style="text-align: left; Width: 50px;"><input type="number" name="UPI" id="UPI" Width="50" placeholder="0" /></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">Credit Card :</td>
+                        <td style="text-align: left; Width: 50px;"><input type="number" name="CreditCard" id="CreditCard" Width="50" placeholder="0" /></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">Debit Card :</td>
+                        <td style="text-align: left; Width: 50px;"><input type="number" name="DebitCard" id="DebitCard" Width="50" placeholder="0" /></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">Internet Banking :</td>
+                        <td style="text-align:left; Width:50px;"><input type="number" name="InternetBanking" id="InternetBanking" placeholder="0" /></td>
+                    </tr>
+                </table>
+            </h4>
+        </div>
+    </div>
+
+    
+    <div class="col-md-12" style="text-align:center">
+        <br />
+        <button type="button" style="background-color: blue; width: 200px;" id="btnProceedPay"><span>Proceed Payment</span></button>
+        <button type="button" style="background-color: blue; width: 200px;" onclick="location.href='@Url.Action("Index","Home")'"><span>Back</span></button>
+    </div>
+    <br />
+</div>    
+    <div class="row ProceedPay" style="display:none">
+        <div class="col-md-12" style="text-align:center">
+            <br />
+            <br />
+            <br />
+            <h2><label id="lblProceedPay" /></h2>
+        </div>
+        <div class="col-md-12" style="text-align:center">
+            <button type="button" style="background-color: blue; width: 200px;" onclick="location.href='@Url.Action("Index","Home")'"><span>Back</span></button>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/jquery-ui-1.13.2.min.js"></script>
+        <script type="text/javascript">
+        $("#btnProceed").click(function () {
+            var obj = {};
+            obj.Product = $('#lblProduct').text();
+            obj.Amount = @TempData["Amt"];
+            obj.Quantity = $('#txtQuantity').val();
+            if (obj.Quantity=="" || obj.Quantity <= 0) {
+                alert("Quantity Should be greater then 0.");
+                return;
+            }
+            $.ajax({
+                url: "/Home/Proceed",
+                method: "post",
+                data: '{obj: ' + JSON.stringify(obj) + '}',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    $('.Order').hide();
+                    $('.Payment').show();
+                    $('.ProceedPay').hide();
+                    $("#lblOrdId").text(response.OrdId);
+                    $("#lblTotAmt").text(response.Amount);
+                },
+                error: function (response) {
+                    alert("Error while Log in the Application");
+                }
+            });
+        });
+
+            $("#btnProceedPay").click(function () {
+            var num = 0;
+            if ($("#Cash").val() == "") {
+                num = num + 1;
+            }
+            if ($("#UPI").val() == "") {
+                num = num + 1;
+            }
+            if ($("#CreditCard").val() == "") {
+                num = num + 1;
+            }
+            if ($("#DebitCard").val() == "") {
+                num = num + 1;
+            }
+            if ($("#InternetBanking").val() == "") {
+                num = num + 1;
+            }
+            if (num == 5) {
+                alert("Total Amount Should Not be 0.");
+                return
+            }
+
+            var num1 = 0;
+            var Amt  = 0;
+            var Mode = "";
+
+            if ($("#Cash").val() != "") {
+                num1 = num1 + 1;
+                Amt = Amt + parseFloat($("#Cash").val());
+                Mode = "Cash";
+            }
+            if ($("#UPI").val() != "") {
+                num1 = num1 + 1;
+                Amt = Amt + parseFloat($("#UPI").val());
+                Mode = "UPI";
+            }
+            if ($("#CreditCard").val() != "") {
+                num1 = num1 + 1;
+                Amt = Amt + parseFloat($("#CreditCard").val());
+                Mode = "Credit Card";
+            }
+            if ($("#DebitCard").val() != "") {
+                num1 = num1 + 1;
+                Amt = Amt + parseFloat($("#DebitCard").val());
+                Mode = "Debit Card";
+            }
+            if ($("#InternetBanking").val() != "") {
+                num1 = num1 + 1;
+                Amt = Amt + parseFloat($("#InternetBanking").val());
+                Mode = "Internet Banking";
+            }
+            if (num1 > 1) {
+                Mode = "Multiple";
+            }
+
+            if (parseFloat(Amt) == parseFloat($('#lblTotAmt').text())) {
+
+            }
+            var obj = {};
+            obj.OrdId = $('#lblOrdId').text();
+            obj.Amount = $('#lblTotAmt').text();
+            obj.PayMode = Mode;//$('#txtPayMode').val();
+            obj.PayAmount = Amt;
+            obj.DueAmount = parseFloat(obj.Amount) - parseFloat(Amt);
+
+            if (parseFloat(obj.PayAmount) != parseFloat(obj.Amount)) {
+                alert("Pay Amount is not matching with Bill Amount");
+                return;
+            }
+            $.ajax({
+                url: "/Home/ProceedPay",
+                method: "post",
+                data: '{obj: ' + JSON.stringify(obj) + '}',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    $('.Order').hide();
+                    $('.Payment').hide();
+                    $('.ProceedPay').show();
+                    $("#lblProceedPay").text(response);
+                },
+                error: function (response) {
+                    alert("Error while Log in the Application");
+                }
+            });
+        });
+        </script>
+    }

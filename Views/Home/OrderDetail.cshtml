@@ -1,0 +1,55 @@
+﻿
+@using System.Data
+@{
+    ViewBag.Title = "OrderDetail";
+}
+<html>
+<head>
+    <style>
+        table, th, td {
+            border: 1px dashed black;
+        }
+    </style>
+</head>
+<body>
+    <br />
+    <table style="width:100%">
+        <tr>
+
+            <th>CUSTOMER NAME</th>
+            <th>ORDER NUMBER</th>
+            <th>ORDER DATE</th>
+            <th>BILL AMOUNT</th>
+            <th>GROCERY NAME</th>
+            <th>BILL STATUS</th>
+            <th>PAY MODE</th>
+            <th>PAY AMOUNT</th>
+            <th>Due AMOUNT</th>
+        </tr>
+        @foreach (DataRow row in Model.dt.Rows)
+        {
+            <tr>
+                <td>@row["name"]</td>
+                <td>@row["ordernumber"]</td>
+                <td>@Convert.ToDateTime(row["orderdate"]).ToString("dd-MM-yyyy")</td>
+                <td>@row["billamount"]</td>
+                <td>@row["groceryname"]</td>
+                <td>@row["billstatus"]</td>
+                <td>@row["PayMode"]</td>
+                <td>@row["PayAmount"]</td>
+                <td>@row["DueAmount"]</td>
+            </tr>
+        }
+    </table>
+    <br />
+    <div class="row">
+        <div class="col-md-12" style="text-align:center"> 
+            <button type="button" style="background-color: blue; width: 200px;" onclick="location.href='@Url.Action("Index","Home")'"><span>Back</span></button>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
